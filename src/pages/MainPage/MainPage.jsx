@@ -19,13 +19,28 @@ const MainPage = () => {
     filter: "",
     subFilter: "",
   });
+  // const [pagination, setPagination] = useState(1);
 
   const filterQuery = searchParams.get("filter") || "";
   const subFilterQuery = searchParams.get("subFilter") || "";
+  const paginationrQuery = searchParams.get("pagination") || "1";
 
   const getAllHeros = () => {
     dispatch(Actions.heros.getHeros());
   };
+
+  const incDicPagination = (newPagination) => {
+    setSearchParams({
+      filter: selectFilter.filter,
+      subFilter: selectFilter.subFilter,
+      pagination: newPagination,
+    });
+  };
+
+  const filterCharacters = () =>
+    !!filterQuery && !!subFilterQuery
+      ? characters.filter((el) => el[`${filterQuery}`] === subFilterQuery)
+      : characters;
 
   useEffect(() => {
     getAllHeros();
@@ -44,8 +59,22 @@ const MainPage = () => {
     setSearchParams({
       filter: selectFilter.filter,
       subFilter: selectFilter.subFilter,
+      pagination: 1,
     });
   }, [selectFilter]);
+
+  useEffect(() => {
+    if (
+      filterCharacters().length > +paginationrQuery &&
+      +paginationrQuery > 0
+    ) {
+      setSearchParams({
+        filter: selectFilter.filter,
+        subFilter: selectFilter.subFilter,
+        pagination: paginationrQuery,
+      });
+    }
+  }, [paginationrQuery]);
 
   return (
     <div className={styles.main}>
@@ -60,12 +89,10 @@ const MainPage = () => {
         </a>
       </div>
       <CardList
-        cardData={
-          !!filterQuery && !!subFilterQuery
-            ? characters.filter((el) => el[`${filterQuery}`] === subFilterQuery)
-            : characters
-        }
+        cardData={filterCharacters()}
         charactersLoading={charactersLoading}
+        pagination={paginationrQuery}
+        incDicPagination={incDicPagination}
       />
     </div>
   );

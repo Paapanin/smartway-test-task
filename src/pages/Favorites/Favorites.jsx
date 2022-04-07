@@ -31,18 +31,20 @@ const Favorites = () => {
       ) : characters.length > 1 && favorites.length > 0 ? (
         favorites.map((el, index) => {
           return (
-            <HeroCard
-              hero={characters.find((characterEl) => characterEl.name === el)}
-              key={index}
-              favorites={favorites}
-              addToFavorites={() => {
-                localStorage.setItem(
-                  "favorites",
-                  JSON.stringify(favorites.filter((name) => name !== el))
-                );
-                setFavorites(JSON.parse(localStorage.getItem("favorites")));
-              }}
-            />
+            <div className={styles.favorites_card}>
+              <HeroCard
+                hero={characters.find((characterEl) => characterEl.name === el)}
+                key={index}
+                favorites={favorites}
+                addToFavorites={() => {
+                  localStorage.setItem(
+                    "favorites",
+                    JSON.stringify(favorites.filter((name) => name !== el))
+                  );
+                  setFavorites(JSON.parse(localStorage.getItem("favorites")));
+                }}
+              />
+            </div>
           );
         })
       ) : (

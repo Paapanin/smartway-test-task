@@ -1,13 +1,22 @@
 .CardList {
+  position: relative;
   display: flex;
   align-items: start;
   flex-wrap: wrap;
-  gap: 17px 0;
   width: 100%;
   margin: 0 0 0 40px;
   padding: 20px 10px;
   border-radius: 25px;
   background-color: rgb(156, 211, 156, 0.8);
+
+  &_Pagination {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+  }
 }
 .loading {
   text-align: center;

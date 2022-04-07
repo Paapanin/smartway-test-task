@@ -4,7 +4,12 @@ import { HeroCard } from "../HeroCard";
 
 import styles from "./styles.module.scss";
 
-const CardList = ({ cardData, charactersLoading }) => {
+const CardList = ({
+  cardData,
+  charactersLoading,
+  pagination,
+  incDicPagination,
+}) => {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) ?? []
   );
@@ -25,7 +30,7 @@ const CardList = ({ cardData, charactersLoading }) => {
   const characterList = () =>
     cardData.length !== 0 ? (
       cardData.map((hero, index) => {
-        return hero.name ? (
+        return pagination * 12 > index && index >= (pagination - 1) * 12 ? (
           <HeroCard
             hero={hero}
             key={index}
@@ -45,6 +50,20 @@ const CardList = ({ cardData, charactersLoading }) => {
       ) : (
         characterList()
       )}
+      <div className={styles.CardList_Pagination}>
+        <button
+          onClick={() => incDicPagination(+pagination - 1)}
+          disabled={+pagination <= 1 ? "disabled" : null}
+        >
+          {"<"}
+        </button>
+        <button
+          onClick={() => incDicPagination(+pagination + 1)}
+          disabled={+pagination >= cardData.length / 12 ? "disabled" : null}
+        >
+          {">"}
+        </button>
+      </div>
     </div>
   );
 };
