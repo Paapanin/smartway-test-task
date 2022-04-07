@@ -1,0 +1,66 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+  border-radius: 20px;
+  background-color: rgb(156, 211, 156);
+
+  &_list {
+    position: relative;
+
+    &:not(:first-child)::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      width: 100%;
+      height: 1px;
+      background-color: black;
+    }
+
+    &:last-child {
+      .sub_filters_button {
+        &:last-child {
+          padding-bottom: 10px;
+          border-radius: 0 0 20px 20px;
+        }
+      }
+    }
+  }
+  &_title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: none;
+    background: none;
+    padding: 20px 0 10px 0px;
+    font-weight: bold;
+
+    &_name {
+      margin: 0 0 0 10px;
+    }
+  }
+}
+
+.sub_filters {
+  display: flex;
+  flex-direction: column;
+
+  &_button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: none;
+    background: none;
+    padding: 5px 0 5px 0px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(65 163 65);
+    }
+
+    &_title {
+      margin: 0 0 0 20px;
+    }
+  }
+}
