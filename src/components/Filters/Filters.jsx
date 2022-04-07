@@ -27,7 +27,7 @@ const Filters = ({ selectFilter, setSelectFilter }) => {
       filter: "hairColour",
       subFilters: [
         { en: "black", ru: "Чёрный" },
-        { en: "green", ru: "Звелёный" },
+        { en: "green", ru: "Зелёный" },
         { en: "red", ru: "Рыжий" },
         { en: "brown", ru: "Коричневый" },
         { en: "blonde", ru: "Белый" },
