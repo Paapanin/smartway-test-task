@@ -37,7 +37,7 @@ const Filters = ({ selectFilter, setSelectFilter }) => {
       title: "По цвету глаз",
       filter: "eyeColour",
       subFilters: [
-        { en: "green", ru: "Звелёный" },
+        { en: "green", ru: "Зелёный" },
         { en: "grey", ru: "Серый" },
         { en: "blue", ru: "Голубой" },
         { en: "brown", ru: "Коричневый" },
