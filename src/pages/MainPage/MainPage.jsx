@@ -10,16 +10,20 @@ import { Actions, Selectors } from "../../ducks";
 
 import styles from "./styles.module.scss";
 
+const LABELS = {
+  FAVORITES: 'Избранное'
+};
+
 const MainPage = () => {
   const dispatch = useDispatch();
   const characters = useSelector(Selectors.heros.getAllHeros);
   const charactersLoading = useSelector(Selectors.heros.getLoadingHeros);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectFilter, setSelectFilter] = useState({
     filter: "",
     subFilter: "",
   });
-  // const [pagination, setPagination] = useState(1);
 
   const filterQuery = searchParams.get("filter") || "";
   const subFilterQuery = searchParams.get("subFilter") || "";
@@ -85,7 +89,7 @@ const MainPage = () => {
         />
 
         <a className={styles.main_navigation_favorites} href="/favorites">
-          Избранное
+          {LABELS.FAVORITES}
         </a>
       </div>
       <CardList

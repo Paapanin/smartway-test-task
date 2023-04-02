@@ -7,9 +7,19 @@ import { Actions, Selectors } from "../../ducks";
 
 import styles from "./styles.module.scss";
 
+const LABELS = { 
+  BACK: 'Вернуться назад',
+  HERO_NOT_FOUND: 'Персонаж не найден',
+  UNKNOWN: 'неизвестно',
+  NAME:'Имя: ',
+  FACULTY:'Факультет: ',
+  DATE_OF_BIRTH:'Дата рождения: ',
+  SEX: 'Пол: '
+};
+
 const Character = () => {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const characters = useSelector(Selectors.heros.getAllHeros);
 
   const characterName = searchParams.get("characterName") || "";
@@ -25,7 +35,7 @@ const Character = () => {
 
   return (
     <div>
-      <a href={`/`}> Вернуться назад</a>
+      <a href={`/`}>{LABELS.BACK}</a>
       <div className={styles.container}>
         {character ? (
           <div className={styles.card}>
@@ -39,18 +49,13 @@ const Character = () => {
                 })`,
               }}
             />
-            <div>Имя: {character.name ? character.name : "неизвестно"}</div>
-            <div>
-              Факультет: {character.house ? character.house : "неизвестен"}
-            </div>
-            <div>
-              Дата рождения:{" "}
-              {character.dateOfBirth ? character.dateOfBirth : " неизвестна"}
-            </div>
-            <div>Пол: {character.gender ? character.gender : "неизвестне"}</div>
+            <div>{LABELS.NAME}{character.name ?? LABELS.UNKNOWN}</div>
+            <div>{LABELS.FACULTY}{character.house ?? LABELS.UNKNOWN}</div>
+            <div>{LABELS.DATE_OF_BIRTH}{character.dateOfBirth ?? LABELS.UNKNOWN}</div>
+            <div>{LABELS.SEX}{character.gender ?? LABELS.UNKNOWN}</div>
           </div>
         ) : (
-          "Персонаж не найден"
+          LABELS.HERO_NOT_FOUND
         )}
       </div>
     </div>

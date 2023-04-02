@@ -1,5 +1,3 @@
-/// SAGA
-
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer, { rootSaga } from "../ducks";
 
